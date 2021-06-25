@@ -17,4 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('register', 'Auth\RegisterController@form');
+Route::get('register', static function () {
+    return view('auth.register');
+});
+
+
+
