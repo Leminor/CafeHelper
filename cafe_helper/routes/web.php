@@ -21,5 +21,7 @@ Route::get('register', static function () {
     return view('auth.register');
 });
 
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@process');
+
 
 
