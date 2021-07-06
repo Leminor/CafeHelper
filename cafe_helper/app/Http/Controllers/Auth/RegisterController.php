@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Entities\StaffEntity;
+use App\Models\Entities\UserEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +20,7 @@ class RegisterController extends Controller
             'repeatPassword' => ''
         ]);
 
-        $staff = new StaffEntity();
+        $staff = new UserEntity();
         $staff->name = $validated['name'];
         $staff->login = $validated['name'];
         $staff->contact = $validated['email'];
@@ -29,7 +29,7 @@ class RegisterController extends Controller
         $staff->access = 'waiter';
         $staff->save();
 
-        return redirect('/');
+        return redirect('/login');
     }
 
 
