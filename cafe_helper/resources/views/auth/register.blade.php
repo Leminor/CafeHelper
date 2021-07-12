@@ -23,4 +23,8 @@
 
     {{ Form::close() }}
 
+    <div class="container">
+        <p class="h6 mb-3 mt-4 fw-normal"> or  <a href="/login">Log in</a></p>
+    </div>
+
 @stop

@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
           crossorigin="anonymous">
+
+
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -36,27 +39,54 @@
             padding: 10px; /* Поля вокруг текста */
         }
 
-        .galleryItem {
-            float:left;
-            margin-left:40px;
-            width:300px;
-            text-align: center;
-        }
+
 
     </style>
 
 </head>
 <body class="d-flex flex-column h-100">
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+
+<header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="/" class="btn btn-light">
+                Home
+            </a>
+        </div>
+        <div class="container">
+            <a href="/import" class="btn btn-primary">
+                Import
+            </a>
+        </div>
+        <div class="container">
+            <a href="/export" class="btn btn-primary">
+                Export
+            </a>
+        </div>
+        <div class="container">
+            <a href="/logout" class="btn btn-danger">
+                Log Out
+            </a>
+        </div>
     </div>
-@endif
-@yield('content')
+</header>
+<main class="flex-shrink-0">
+    <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @yield('content')
+    </div>
+</main>
+
+
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
         <span class="text-muted">Cafe-helper 2021</span>
