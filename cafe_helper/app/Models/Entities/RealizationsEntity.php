@@ -51,4 +51,26 @@ class RealizationsEntity extends Model
     {
         return $this->hasOne(UserEntity::class, 'id', 'creator_id');
     }
+
+    public function updater(): HasOne
+    {
+        return $this->hasOne(UserEntity::class, 'id', 'updater_id');
+    }
+
+    public function warehouse(): HasOne
+    {
+        return $this->hasOne(WarehousesEntity::class, 'id', 'warehouse_id');
+    }
+
+    public function client(): HasOne
+    {
+        return $this->hasOne(ClientsEntity::class, 'id', 'client_id');
+    }
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(ProductsEntity::class, 'id', 'product_id');
+    }
+
+
 }

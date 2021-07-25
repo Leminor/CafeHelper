@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100">
 <head>
+    <livewire:styles />
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width-device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -29,7 +30,7 @@
 
         .container {
             width: auto;
-            max-width: 680px;
+            max-width: 1000px;
             padding: 0 15px;
         }
 
@@ -38,6 +39,21 @@
             background: #E0FFFF; /* Цвет фона */
             padding: 10px; /* Поля вокруг текста */
         }
+
+        .whole-background
+        {
+            position:fixed;
+            padding:0;
+            margin:0;
+
+            top:0;
+            left:0;
+
+            width: 100%;
+            height: 100%;
+        }
+
+
 
 
 
@@ -54,12 +70,32 @@
             </a>
         </div>
         <div class="container">
-            <a href="/import" class="btn btn-primary">
+            <a href="/show/realizations" class="btn btn-light">
+                Realizations
+            </a>
+        </div>
+        <div class="container">
+            <a href="/show/purchases" class="btn btn-light">
+                Purchases
+            </a>
+        </div>
+        <div class="container">
+            <a href="/create/realization" class="btn btn-primary">
+                New realization
+            </a>
+        </div>
+        <div class="container">
+            <a href="/create/purchase" class="btn btn-primary">
+                New purchase
+            </a>
+        </div>
+        <div class="container">
+            <a href="/import" class="btn btn-info">
                 Import
             </a>
         </div>
         <div class="container">
-            <a href="/export" class="btn btn-primary">
+            <a href="/export" class="btn btn-info">
                 Export
             </a>
         </div>
@@ -92,6 +128,7 @@
         <span class="text-muted">Cafe-helper 2021</span>
     </div>
 </footer>
+<livewire:scripts />
 </body>
 </html>
 

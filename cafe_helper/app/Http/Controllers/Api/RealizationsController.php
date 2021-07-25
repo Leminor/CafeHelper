@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Entities\RealizationsEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use RuntimeException;
 
 class RealizationsController extends Controller

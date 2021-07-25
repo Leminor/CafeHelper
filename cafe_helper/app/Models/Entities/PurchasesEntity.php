@@ -51,6 +51,27 @@ class PurchasesEntity extends Model
 
     public function creator(): HasOne
     {
-        return $this->hasOne(UserEntity::class, 'creator_id');
+        return $this->hasOne(UserEntity::class, 'id', 'creator_id');
     }
+
+    public function updater(): HasOne
+    {
+        return $this->hasOne(UserEntity::class, 'id', 'updater_id');
+    }
+
+    public function warehouse(): HasOne
+    {
+        return $this->hasOne(WarehousesEntity::class, 'id', 'warehouse_id');
+    }
+
+    public function supplier(): HasOne
+    {
+        return $this->hasOne(SuppliersEntity::class, 'id', 'supplier_id');
+    }
+
+    public function product(): HasOne
+    {
+        return $this->hasOne(ProductsEntity::class, 'id', 'product_id');
+    }
+
 }

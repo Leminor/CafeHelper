@@ -26,11 +26,16 @@ Route::group(['middleware' => 'guest'], static function() {
 
 Route::group(['middleware' => 'auth'], static function() {
     Route::get('', fn() => view('index'));
-    Route::get('logout', 'App\Http\Controllers\Auth\LogoutController@process');
     Route::get('import', fn() => view('import'));
     Route::get('export', fn() => view('export'));
+    Route::get('create/realization', fn() => view('create/realization'));
+    Route::get('create/purchase', fn() => view('create/purchase'));
+    Route::get('show/realizations', fn() => view('show/realizations'));
+    Route::get('show/purchases', fn() => view('show/purchases'));
+    Route::get('logout', 'App\Http\Controllers\Auth\LogoutController@process');
     Route::post('import/excel', 'App\Http\Controllers\ExcelController@import')->name('import/excel');
     Route::post('export/excel', 'App\Http\Controllers\ExcelController@export')->name('export/excel');
+    Route::post('order/create', 'App\Http\Controllers\OrdersController@create')->name('order/create');
 });
 
 
