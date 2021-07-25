@@ -79,11 +79,11 @@
                 Purchases
             </a>
         </div>
-        <div class="container">
-            <a href="/create/realization" class="btn btn-primary">
-                New realization
-            </a>
-        </div>
+{{--        <div class="container">--}}
+{{--            <a href="/create/realization" class="btn btn-primary">--}}
+{{--                New realization--}}
+{{--            </a>--}}
+{{--        </div>--}}
         <div class="container">
             <a href="/create/purchase" class="btn btn-primary">
                 New purchase
