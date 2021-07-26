@@ -12,10 +12,10 @@ class AddTimestampsOnCreate extends Migration
     {
         $tables = DB::select('SHOW TABLES');
         foreach ($tables as $table) {
-            if($table->Tables_in_cafe_helper_mysql != 'migrations') {
+            if($table->Tables_in_vj430144_db != 'migrations') {
 
                 $sql = <<< SQL
-                ALTER TABLE `$table->Tables_in_cafe_helper_mysql`
+                ALTER TABLE `$table->Tables_in_vj430144_db`
                     MODIFY `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     MODIFY `updated_at` TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
                 SQL;
