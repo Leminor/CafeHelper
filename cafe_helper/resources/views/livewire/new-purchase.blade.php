@@ -5,16 +5,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <input type="number" class="form-control" placeholder="Add purchase #" list="suppliers"
-                               wire:model="order_id" wire:keydown.escape="resetValue" wire:keydown.tab="resetValue">
-                        <datalist id="suppliers">
-                            <select>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier['company_name']}}">
-                                    @endforeach
-
-                            </select>
-                        </datalist>
-                        @error('first_name.0') <span class="text-danger error">{{ $message }}</span>@enderror
+                               wire:model="order_id">
+                        @error('order_id') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </div>
@@ -22,13 +14,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search supplier..." list="suppliers"
-                               wire:model="supplier_name" wire:keydown.escape="resetValue" wire:keydown.tab="resetValue">
+                               wire:model="supplier_name">
                         <datalist id="suppliers">
                                     @foreach($suppliers as $supplier)
                                         <option value="{{$supplier['company_name']}}">
                                     @endforeach
                         </datalist>
-                        @error('first_name.0') <span class="text-danger error">{{ $message }}</span>@enderror
+                        @error('supplier_name') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ use Livewire\Component;
 class NewPurchase extends Component
 {
 
-    public $students, $first_name, $last_name, $student_id, $product_name, $amount, $price, $supplier_name, $order_id;
+    public $product_name, $amount, $price, $supplier_name, $order_id;
     public $updateMode = false;
     public $inputs = [];
     public $i = 1;
@@ -33,9 +33,9 @@ class NewPurchase extends Component
     private function resetInputFields(){
         $this->first_name = '';
         $this->last_name = '';
-        $this->product_name = '';
-        $this->amount = '';
-        $this->price = '';
+        $this->product_name = [];
+        $this->amount = [];
+        $this->price = [];
         $this->supplier_name = '';
         $this->order_id = '';
     }
@@ -46,12 +46,11 @@ class NewPurchase extends Component
 
         foreach ($this->product_name as $key => $value) {
             $purchase = New PurchasesEntity();
-            $productName = $this->product_name[$key];
-            $productIdArray = ProductsEntity::query()->select('id')->where('name', '=', "$productName")->get()->toArray();
-            $productId = $productIdArray['0']['id'];
 
-            $supplierIdArray = SuppliersEntity::query()->select('id')->where('company_name', "$this->supplier_name")->get()->toArray();
-            $supplierId = $supplierIdArray['0']['id'];
+            $productName = $this->product_name[$key];
+
+            $productId = ProductsEntity::query()->where('name', '=', $productName)->first()->id;
+            $supplierId = SuppliersEntity::query()->where('company_name', "$this->supplier_name")->first()->id;
 
             $purchase->warehouse_id = 1;
             $purchase->order_id = $this->order_id;
@@ -61,7 +60,6 @@ class NewPurchase extends Component
             $purchase->price = $this->price[$key];
             $purchase->creator_id = Auth::user()->getAuthIdentifier();
             $purchase->save();
-
         }
 
         $this->inputs = [];
@@ -77,9 +75,17 @@ class NewPurchase extends Component
         $this->suppliers = SuppliersEntity::query()->get()->toArray();
     }
 
+    public function getOrderID()
+    {
+        $lastOrderID = PurchasesEntity::query()->select('order_id')->latest()->first()->order_id;
+        $this->order_id = $lastOrderID + 1;
+
+    }
+
     public function render()
     {
         $this->getDB();
+        $this->getOrderID();
         return view('livewire.new-purchase');
     }
 }

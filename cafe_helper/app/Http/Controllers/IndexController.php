@@ -8,6 +8,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        var_dump(Auth::user());
+        return view('index');
     }
 }

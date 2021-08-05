@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    public function index()
+    {
+        return view('auth.register');
+    }
+
     public function process(Request $request)
     {
         $validated = $request->validate([

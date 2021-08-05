@@ -19,6 +19,11 @@ class LoginController extends Controller
 
     private ?User $user = null;
 
+    public function index()
+    {
+        return view('auth.login');
+    }
+
     public function process(Request $request)
     {
         $validated = $request->validate([

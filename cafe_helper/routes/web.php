@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImportController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RealizationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,28 +22,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'guest'], static function() {
-    Route::get('register', fn() => view('auth.register'));
-    Route::get('login', [
-        'as' =>'login',
-        'uses' => fn() => view('auth.login')
-    ]);
+    Route::get('register', [RegisterController::class, 'index']);
+    Route::get('login', [LoginController::class, 'index']);
 
-    Route::post('register', 'App\Http\Controllers\Auth\RegisterController@process');
-    Route::post('login', ['as' =>'login', 'uses' => 'App\Http\Controllers\Auth\LoginController@process']);
+    Route::post('register', [RegisterController::class, 'process']);
+    Route::post('login', [LoginController::class, 'process']);
 });
 
 Route::group(['middleware' => 'auth'], static function() {
-    Route::get('', fn() => view('index'));
-    Route::get('import', fn() => view('import'));
-    Route::get('export', fn() => view('export'));
-    Route::get('create/realization', fn() => view('create/realization'));
-    Route::get('create/purchase', fn() => view('create/purchase'));
-    Route::get('show/realizations', fn() => view('show/realizations'));
-    Route::get('show/purchases', fn() => view('show/purchases'));
-    Route::get('logout', 'App\Http\Controllers\Auth\LogoutController@process');
-    Route::post('import/excel', 'App\Http\Controllers\ExcelController@import')->name('import/excel');
-    Route::post('export/excel', 'App\Http\Controllers\ExcelController@export')->name('export/excel');
+    Route::get('/', [IndexController::class, 'index']);
+
+    Route::get('import', [ImportController::class, 'index']);
+    Route::get('export', [ExportController::class, 'index']);
+    Route::post('import/excel', [ImportController::class, 'process']);
+    Route::post('export/excel', [ExportController::class, 'process']);
+
+    Route::get('show/realizations', [RealizationController::class, 'show']);
+    Route::get('create/realization', [RealizationController::class, 'create']);
+
+    Route::get('show/purchases', [PurchaseController::class, 'show']);
+    Route::get('create/purchase', [PurchaseController::class, 'create']);
     Route::post('order/create', 'App\Http\Controllers\OrdersController@create')->name('order/create');
+
+    Route::get('logout', [LogoutController::class, 'process']);
+
 });
 
 
