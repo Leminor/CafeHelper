@@ -14,7 +14,7 @@ class ExportController extends Controller
 
     public function index()
     {
-       return view('export');
+        return view('export');
     }
 
     public function process(Request $request)

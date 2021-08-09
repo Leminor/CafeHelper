@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 
 class PurchaseController
 {
-    public function show()
+    public function index()
     {
         return view('show.purchases');
     }

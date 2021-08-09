@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 class RealizationController
 {
-    public function show()
+    public function index()
     {
         return view('show.realizations');
     }

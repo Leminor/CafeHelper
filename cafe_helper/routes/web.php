@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RealizationController;
 use Illuminate\Support\Facades\Route;
@@ -23,28 +24,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest'], static function() {
     Route::get('register', [RegisterController::class, 'index']);
-    Route::get('login', [LoginController::class, 'index']);
+    Route::get('login', [
+        'as' =>'login',
+        'uses' => fn() => view('auth.login')
+    ]);
 
     Route::post('register', [RegisterController::class, 'process']);
     Route::post('login', [LoginController::class, 'process']);
 });
 
 Route::group(['middleware' => 'auth'], static function() {
-    Route::get('/', [IndexController::class, 'index']);
+    Route::get('/', [IndexController::class, 'index'])->name('/');
 
-    Route::get('import', [ImportController::class, 'index']);
-    Route::get('export', [ExportController::class, 'index']);
-    Route::post('import/excel', [ImportController::class, 'process']);
-    Route::post('export/excel', [ExportController::class, 'process']);
+    Route::get('import', [ImportController::class, 'index'])->name('/import');
+    Route::get('export', [ExportController::class, 'index'])->name('/export');
+    Route::post('import/excel', [ImportController::class, 'process'])->name('import/excel');
+    Route::post('export/excel', [ExportController::class, 'process'])->name('export/excel');
 
-    Route::get('show/realizations', [RealizationController::class, 'show']);
-    Route::get('create/realization', [RealizationController::class, 'create']);
+    Route::get('realizations', [RealizationController::class, 'index'])->name('realizations');
+    Route::get('realizations/create', [RealizationController::class, 'create'])->name('realizations/create');
 
-    Route::get('show/purchases', [PurchaseController::class, 'show']);
-    Route::get('create/purchase', [PurchaseController::class, 'create']);
+    Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases');
+    Route::get('purchases/create', [PurchaseController::class, 'create'])->name('purchases/create');
     Route::post('order/create', 'App\Http\Controllers\OrdersController@create')->name('order/create');
 
+    Route::get('products', [ProductsController::class, 'index'])->name('products');
+
     Route::get('logout', [LogoutController::class, 'process']);
+
 
 });
 

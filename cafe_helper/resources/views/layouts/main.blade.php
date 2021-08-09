@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en" class="h-100">
 <head>
-    <livewire:styles />
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width-device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <livewire:styles />
     <title>Cafe Helper</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
@@ -52,50 +52,50 @@
             width: 100%;
             height: 100%;
         }
-
-
-
-
-
     </style>
-
 </head>
 <body class="d-flex flex-column h-100">
 
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="/" class="btn btn-light">
+            <a href="/"
+               class="{{ request()->is('/') ? 'btn btn-success' : 'btn btn-light' }}">
                 Home
             </a>
         </div>
         <div class="container">
-            <a href="/show/realizations" class="btn btn-light">
+            <a href="/products" class="{{ request()->is('products') ? 'btn btn-success' : 'btn btn-light' }}">
+                Products
+            </a>
+        </div>
+        <div class="container">
+            <a href="/realizations" class="{{ request()->is('realizations') ? 'btn btn-success' : 'btn btn-light' }}">
                 Realizations
             </a>
         </div>
         <div class="container">
-            <a href="/show/purchases" class="btn btn-light">
+            <a href="/purchases" class="{{ request()->is('purchases') ? 'btn btn-success' : 'btn btn-light' }}">
                 Purchases
             </a>
         </div>
-{{--        <div class="container">--}}
-{{--            <a href="/create/realization" class="btn btn-primary">--}}
-{{--                New realization--}}
-{{--            </a>--}}
-{{--        </div>--}}
+        {{--        <div class="container">--}}
+        {{--            <a href="/create/realization" class="btn btn-primary">--}}
+        {{--                New realization--}}
+        {{--            </a>--}}
+        {{--        </div>--}}
         <div class="container">
-            <a href="/create/purchase" class="btn btn-primary">
+            <a href="/purchases/create" class="{{ request()->is('purchases/create') ? 'btn btn-success' : 'btn btn-primary' }}">
                 New purchase
             </a>
         </div>
         <div class="container">
-            <a href="/import" class="btn btn-info">
+            <a href="/import" class="{{ request()->is('import') ? 'btn btn-success' : 'btn btn-info' }}">
                 Import
             </a>
         </div>
         <div class="container">
-            <a href="/export" class="btn btn-info">
+            <a href="/export" class="{{ request()->is('export') ? 'btn btn-success' : 'btn btn-info' }}">
                 Export
             </a>
         </div>

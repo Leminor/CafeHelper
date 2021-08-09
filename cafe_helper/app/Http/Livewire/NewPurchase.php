@@ -40,9 +40,39 @@ class NewPurchase extends Component
         $this->order_id = '';
     }
 
+    public function validateData()
+    {
+        $products = $this->products;
+
+        $validatedData = $this->validate([
+            'product_name.0' => 'required|exists:products,name',
+            'product_name.*' => 'required|exists:products,name',
+            'amount.0' => 'required',
+            'amount.*' => 'required',
+            'price.0' => 'required',
+            'price.*' => 'required',
+            'supplier_name' => 'required|exists:suppliers,company_name',
+            'order_id' => 'required',
+        ],
+            [
+                'product_name.0.required' => 'Product name field is required',
+                'product_name.0.exists' => 'Product must be in products list',
+                'product_name.*.required' => 'Product name field is required',
+                'product_name.*.exists' => 'Product must be in products list',
+                'amount.0.required' => 'Amount field is required',
+                'amount.*.required' => 'Amount field is required',
+                'price.0.required' => 'Price field is required',
+                'price.*.required' => 'Price name field is required',
+                'supplier_name.required' => 'Supplier field is required',
+                'supplier_name.exists' => 'Supplier must be in suppliers list',
+                'order_id.required' => 'Order number field is required',
+            ]
+        );
+    }
 
     public function insertDB()
     {
+        $this->validateData();
 
         foreach ($this->product_name as $key => $value) {
             $purchase = New PurchasesEntity();
@@ -86,6 +116,7 @@ class NewPurchase extends Component
     {
         $this->getDB();
         $this->getOrderID();
+
         return view('livewire.new-purchase');
     }
 }
