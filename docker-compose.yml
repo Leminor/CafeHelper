@@ -1,40 +1,40 @@
 version: '3'
 services:
-    app:
-      build: docker/php
-      container_name: cafe_helper_php
-      volumes:
+  app:
+    build: docker/php
+    container_name: cafe_helper_php
+    volumes:
       - ./:/var/www
-      depends_on:
-        - mySQL
-    nginx:
-      image: nginx:1.17
-      container_name: cafe_helper_nginx
-      ports:
-        - 8025:80
-      volumes:
-        - ./:/var/www
-        - ./docker/nginx/cafe_helper.local.conf:/etc/nginx/conf.d/cafe_helper.local.conf
-      depends_on:
-        - app
-    mySQL:
-      image: mysql:8.0.23
-      ports:
-        - 3325:3306
-      restart: always
-      volumes:
-        - ./docker/mySQL:/var/lib/mysql
-      container_name: cafe_helper_mySQL
-      command: --default-authentication-plugin=mysql_native_password
-      environment:
-        MYSQL_DATABASE: cafe_helper_mySQL
-        MYSQL_USER: cafe_helper_user
-        MYSQL_PASSWORD: 71611Alex
-        MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    phpmyadmin:
-      image: phpmyadmin
-      ports:
-        - 8026:80
-      environment:
-        - PMA_ARBITRARY=1
-        - PMA_HOST=pma.local
+    depends_on:
+      - mySQL
+  nginx:
+    image: nginx:1.17
+    container_name: cafe_helper_nginx
+    ports:
+      - 8025:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/cafe_helper.local.conf:/etc/nginx/conf.d/cafe_helper.local.conf
+    depends_on:
+      - app
+  mySQL:
+    image: mysql:8.0.23
+    ports:
+      - 3325:3306
+    restart: always
+    volumes:
+      - ./docker/mySQL:/var/lib/mysql
+    container_name: cafe_helper_mySQL
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: cafe_helper_mySQL
+      MYSQL_USER: cafe_helper_user
+      MYSQL_PASSWORD: 71611Alex
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8026:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=pma.local
